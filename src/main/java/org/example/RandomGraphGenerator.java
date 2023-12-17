@@ -1,4 +1,5 @@
 package org.example;
+import java.util.Iterator;
 import java.util.Random;
 
 public class RandomGraphGenerator {
@@ -21,7 +22,16 @@ public class RandomGraphGenerator {
             int w = random.nextInt(V);
 
             // Проверка на то, что ребро еще не существует
-            if (!graph.getNeighbors(v).contains(w)) {
+            Iterator<Integer> neighborsIterator = graph.getNeighborsIterator(v);
+            boolean edgeExists = false;
+            while (neighborsIterator.hasNext()) {
+                if (neighborsIterator.next() == w) {
+                    edgeExists = true;
+                    break;
+                }
+            }
+
+            if (!edgeExists) {
                 graph.addEdge(v, w);
                 if (!isDirected) {
                     // Добавление обратного ребра для неориентированного графа
@@ -29,7 +39,6 @@ public class RandomGraphGenerator {
                 }
             }
         }
-
         return graph;
     }
 }
