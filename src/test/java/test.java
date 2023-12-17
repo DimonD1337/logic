@@ -17,12 +17,12 @@ public class test {
         testGraph.addEdge(1, 2);
         testGraph.addEdge(2, 3);
 
-        assertEquals(List.of(1, 2), testGraph.getNeighbors(0));
-        assertEquals(List.of(0, 2), testGraph.getNeighbors(1));
+        assertEquals(List.of(1, 2), testGraph.getNeighborsIterator(0));
+        assertEquals(List.of(0, 2), testGraph.getNeighborsIterator(1));
 
         testGraph.removeEdge(1, 2);
-        assertEquals(List.of(1 , 2), testGraph.getNeighbors(0));
-        assertEquals(List.of(0 , 3), testGraph.getNeighbors(2));
+        assertEquals(List.of(1 , 2), testGraph.getNeighborsIterator(0));
+        assertEquals(List.of(0 , 3), testGraph.getNeighborsIterator(2));
     }
 
     @Test
