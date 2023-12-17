@@ -1,13 +1,14 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class Graph<T> {
+class Graph<T> {
     private int V; // количество вершин
     private List<Set<T>> adjacencyList; // список смежности
 
+
+    public Iterator<T> getNeighborsIterator(T v) {
+        return getNeighbors(v).iterator();
+    }
     public Graph(int V) {
         this.V = V;
         adjacencyList = new ArrayList<>(V);
@@ -20,13 +21,11 @@ public class Graph<T> {
         Set<T> neighbors = new HashSet<>(adjacencyList.get(convertVertexToIndex(v)));
         if (!neighbors.contains(w)) {
             adjacencyList.get(convertVertexToIndex(v)).add(w);
-            adjacencyList.get(convertVertexToIndex(w)).add(v);
         }
     }
 
     public void removeEdge(T v, T w) {
         adjacencyList.get(convertVertexToIndex(v)).remove(w);
-        adjacencyList.get(convertVertexToIndex(w)).remove(v);
     }
 
     public List<T> getNeighbors(T v) {
@@ -39,5 +38,9 @@ public class Graph<T> {
 
     private int convertVertexToIndex(T vertex) {
         return (Integer) vertex;
+    }
+
+    public Iterator<T> getNeighborsIterator(int vertex) {
+        return adjacencyList.get(vertex).iterator();
     }
 }
