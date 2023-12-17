@@ -1,7 +1,7 @@
 package org.example;
-import java.util.List;
+import java.util.Iterator;
 
-public class DepthFirstSearch {
+class DepthFirstSearch {
     private boolean[] visited;
     private Graph graph;
 
@@ -14,8 +14,9 @@ public class DepthFirstSearch {
         visited[startVertex] = true;
         System.out.print(startVertex + " ");
 
-        List<Integer> neighbors = graph.getNeighbors(startVertex);
-        for (int neighbor : neighbors) {
+        Iterator<Integer> neighborsIterator = graph.getNeighborsIterator(startVertex);
+        while (neighborsIterator.hasNext()) {
+            int neighbor = neighborsIterator.next();
             if (!visited[neighbor]) {
                 // Рекурсивный вызов для непосещенных соседей
                 depthFirstSearch(neighbor);
